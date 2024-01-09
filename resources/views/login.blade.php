@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>Login Page</title>
-    <link rel="shortcut icon" href="{{ asset('assets/img/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/img/imagi/imagi-white.jpeg') }}">
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/modules/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/modules/fontawesome/css/all.min.css') }}">
@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                         <div class="login-brand">
-                            <img src="{{ asset('assets/img/logo.png') }}" alt="logo" width="100" class="shadow-light rounded-circle">
+                            <img src="{{ asset('assets/img/imagi/imagi-white.jpeg') }}" alt="logo" width="100" class="shadow-light rounded-circle">
                         </div>
 
                         @if ($errors->any())
@@ -44,11 +44,11 @@
                             </div>
 
                             <div class="card-body">
-                                <form method="POST" action="#" class="needs-validation" novalidate="">
+                                <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate="">
                                     @csrf
                                     <div class="form-group">
                                         <label for="email">Email</label>
-                                        <input id="email" type="email" class="form-control" name="email" placeholder="Masukkan Email" tabindex="1" required autofocus>
+                                        <input id="email" value="{{ old('email') }}" type="email" class="form-control" name="email" placeholder="Masukkan Email" tabindex="1" required autofocus>
                                         <div class="invalid-feedback">
                                             Masukkan Email
                                         </div>
