@@ -34,25 +34,6 @@ class SesiController extends Controller
         return redirect()->route('login');
     }
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name'     => ['required'],
-            'role'     => ['required'],
-            'email'         => ['required', 'email','unique:users'],
-            'password'      => ['required', 'confirmed'],
-        ],
-            [
-                'name.required'    => 'Masukkan Nama Lengkap Anda !',
-                'role.required'    => 'Pilih Role !',
-                'email.required'        => 'Masukkan Alamat Email Anda !',
-                'email.unique'          => 'Alamat Email Sudah Terdaftar !',
-                'password.required'     => 'Masukkan Password Anda !',
-                'password.confirmed'    => 'Konfirmasi Password Salah !',
-            ]
-        );
-    }
-
     public function login() {
         return view('auth.login');
     }
@@ -75,7 +56,7 @@ class SesiController extends Controller
             if (Auth::user()->role == 'admin') {
                 return redirect('admin');
             } elseif (Auth::user()->role == 'pemegang_saham') {
-                return redirect('pemegang-saham');
+                return redirect('dashboard');
             }
         } else {
             return redirect('')->withErrors('Username dan password yang dimasukkan tidak sesuai')->withInput();
