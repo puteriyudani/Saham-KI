@@ -57,24 +57,84 @@ Dashboard
 
                     <div class="table-responsive">
                         <table class="table table-bordered">
+                            <tr>
+                                <th scope="row" style="width: 170px">Total Modal Awal</th>
+                                <td>Rp.250.000.000</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th scope="col" style="text-align: center;width: 6%">NO.</th>
                                     <th scope="col">TANGGAL</th>
-                                    <th scope="col">NAMA</th>
                                     <th scope="col">KETERANGAN</th>
-                                    <th scope="col">NOMINAL</th>
-                                    <th scope="col">PERSENTASE (%)</th>
+                                    <th scope="col">KHAIRI</th>
+                                    <th scope="col">FADHIL</th>
+                                    <th scope="col">MARHADI</th>
+                                    <th scope="col">FAHMI</th>
+                                    <th scope="col">RIDHO</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {{-- isi --}}
                                 <tr>
                                     <th scope="row" style="text-align: center">1</th>
-                                    <td>10 Januari 2023</td>
-                                    <td>Khairi</td>
-                                    <td>Item A</td>
-                                    <td>Rp. 500.000</td>
-                                    <td>20 %</td>
+                                    <td>10 Januari 2024</td>
+                                    <td>Gaji</td>
+                                    <td>Rp.1.000.000</td>
+                                    <td>Rp.1.000.000</td>
+                                    <td>Rp.1.000.000</td>
+                                    <td>Rp.1.000.000</td>
+                                    <td>Rp.1.000.000</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: center">1</th>
+                                    <td>10 Januari 2024</td>
+                                    <td>Gaji</td>
+                                    <td>Rp.1.000.000</td>
+                                    <td>Rp.1.000.000</td>
+                                    <td>Rp.1.000.000</td>
+                                    <td>Rp.1.000.000</td>
+                                    <td>Rp.1.000.000</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" style="text-align: center">1</th>
+                                    <td>10 Januari 2024</td>
+                                    <td>Gaji</td>
+                                    <td>Rp.1.000.000</td>
+                                    <td>Rp.1.000.000</td>
+                                    <td>Rp.1.000.000</td>
+                                    <td>Rp.1.000.000</td>
+                                    <td>Rp.1.000.000</td>
+                                </tr>
+                                {{-- end isi --}}
+
+                                <tr>
+                                    <th scope="row" colspan="3" style="width: 250px">Kewajiban Investasi</th>
+                                    <th>77.500.000</th>
+                                    <th>52.500.000</th>
+                                    <th>40.000.000</th>
+                                    <th>40.000.000</th>
+                                    <th>40.000.000</th>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="3" style="width: 250px">Progress Investasi Saat Ini</th>
+                                    <td>6%</td>
+                                    <td>6%</td>
+                                    <td>6%</td>
+                                    <td>6%</td>
+                                    <td>6%</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row" colspan="3" style="width: 250px">Hutang Investasi</th>
+                                    <td>72.500.000</td>
+                                    <td>72.500.000</td>
+                                    <td>72.500.000</td>
+                                    <td>72.500.000</td>
+                                    <td>72.500.000</td>
                                 </tr>
                             </tbody>
                             {{-- <tbody>
@@ -98,11 +158,12 @@ Dashboard
                         <div style="text-align: center">
                             {{-- {{$credit->links("vendor.pagination.bootstrap-4")}} --}}
                         </div>
-                        <div style="text-align: center; margin-top: 20px;">
+
+                        {{-- <div style="text-align: center; margin-top: 20px;">
                             <a href="" class="btn btn-success">
                                 <i class="fa fa-download"></i> Unduh PDF
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
 
                 </div>
