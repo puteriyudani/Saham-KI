@@ -2,16 +2,62 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class SesiController extends Controller
 {
-    function index() {
-        return view('login');
+    public function register() {
+        return view('auth.register');
     }
 
-    function login(Request $request) {
+    public function registerPost(Request $request) {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',
+            'password' => 'required',
+            'password_confirmation' => 'required|same:password',
+            'role' => 'required',
+        ]);
+
+        $user = new User([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+        ]);
+        $user->save();
+
+        return redirect()->route('login');
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name'     => ['required'],
+            'role'     => ['required'],
+            'email'         => ['required', 'email','unique:users'],
+            'password'      => ['required', 'confirmed'],
+        ],
+            [
+                'name.required'    => 'Masukkan Nama Lengkap Anda !',
+                'role.required'    => 'Pilih Role !',
+                'email.required'        => 'Masukkan Alamat Email Anda !',
+                'email.unique'          => 'Alamat Email Sudah Terdaftar !',
+                'password.required'     => 'Masukkan Password Anda !',
+                'password.confirmed'    => 'Konfirmasi Password Salah !',
+            ]
+        );
+    }
+
+    public function login() {
+        return view('auth.login');
+    }
+
+    public function loginPost(Request $request) {
         $request->validate([
             'email' => 'required',
             'password' => 'required'
@@ -38,6 +84,6 @@ class SesiController extends Controller
 
     function logout() {
         Auth::logout();
-        return redirect('');
+        return redirect('/');
     }
 }
