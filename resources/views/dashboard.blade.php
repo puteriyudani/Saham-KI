@@ -59,7 +59,9 @@ Dashboard
                         <table class="table table-bordered">
                             <tr>
                                 <th scope="row" style="width: 170px">Total Modal Awal</th>
-                                <td>Rp.250.000.000</td>
+                                @foreach ($modaldasar as $modal)
+                                    <td>Rp. {{ number_format($modal->nominal,0,',','.') }}</td>
+                                @endforeach
                             </tr>
                         </table>
                     </div>
