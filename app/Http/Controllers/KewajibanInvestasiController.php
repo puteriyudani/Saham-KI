@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ModalDasar;
+use App\Models\KI;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ModalDasarController extends Controller
+class KewajibanInvestasiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $pemegangsahams = User::where('role', 'pemegang_saham')->get();
+        return view('ki.create', compact('pemegangsahams'));
     }
 
     /**
@@ -20,7 +22,8 @@ class ModalDasarController extends Controller
      */
     public function create()
     {
-        //
+        $pemegangsahams = User::where('role', 'pemegang_saham')->get();
+        return view('ki.create', compact('pemegangsahams'));
     }
 
     /**
@@ -28,7 +31,17 @@ class ModalDasarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'nominal' => 'required',
+        ]);
+
+        $input = $request->all();
+    
+        KI::create($input);
+    
+        return redirect()->route('dashboard')
+                        ->with('success','Investasi Saham created successfully.');
     }
 
     /**
@@ -42,24 +55,17 @@ class ModalDasarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ModalDasar $modaldasar)
+    public function edit(string $id)
     {
-        return view('modal.edit', compact('modaldasar'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ModalDasar $modaldasar)
+    public function update(Request $request, string $id)
     {
-        $request->validate([
-            'nominal' => 'required',
-        ]);
-    
-        $modaldasar->update($request->all());
-    
-        return redirect()->route('')
-                        ->with('success','Modal Dasar updated successfully');
+        //
     }
 
     /**

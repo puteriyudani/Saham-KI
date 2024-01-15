@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Tambah Saham
+    Edit Saham
 @stop
 
 @section('content')
@@ -15,7 +15,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                        <h4><i class="fas fa-money-check-alt"></i> TAMBAH INVESTASI SAHAM </h4>
+                        <h4><i class="fas fa-money-check-alt"></i> EDIT INVESTASI SAHAM </h4>
                     </div>
 
                     <div class="card-body">
@@ -31,14 +31,14 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('saham.store') }}" method="POST">
+                        <form action="{{ route('saham.update', $saham->id) }}" method="POST">
                             @csrf
-
+                            @method('PUT')
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>NOMINAL (Rp.)</label>
-                                        <input type="text" name="nominal" value="{{ old('nominal') }}" placeholder="Masukkan Nominal" class="form-control currency">
+                                        <input type="text" name="nominal" value="{{ old('nominal', $saham->nominal) }}" placeholder="Masukkan Nominal" class="form-control currency">
 
                                         @error('nominal')
                                         <div class="invalid-feedback" style="display: block">
@@ -50,7 +50,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>TANGGAL</label>
-                                        <input type="text" class="form-control datetimepicker" name="tanggal" placeholder="Pilih Tanggal">
+                                        <input type="text" class="form-control datetimepicker" name="tanggal" value="{{ old('tanggal', $saham->tanggal) }}" placeholder="Pilih Tanggal">
 
                                         @error('tanggal')
                                         <div class="invalid-feedback" style="display: block">
@@ -65,10 +65,14 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>NAMA</label>
-                                        <select class="form-control select2" name="nama" style="width: 100%">
+                                        <select class="form-control select2" name="nama">
                                             <option value="">-- PILIH NAMA --</option>
                                             @foreach ($pemegangsahams as $pemegangsaham)
-                                                <option value="{{ $pemegangsaham->name }}"> {{ $pemegangsaham->name }}</option>
+                                                @if($saham->nama == $pemegangsaham->name)
+                                                    <option value="{{ $pemegangsaham->name }}" selected> {{ $pemegangsaham->name }}</option>
+                                                @else
+                                                    <option value="{{ $pemegangsaham->name }}"> {{ $pemegangsaham->name }}</option>
+                                                @endif
                                             @endforeach
                                         </select>
 
@@ -85,7 +89,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>KETERANGAN</label>
-                                        <textarea class="form-control" name="keterangan" rows="6" placeholder="Masukkan Keterangan">{{ old('keterangan') }}</textarea>
+                                        <textarea class="form-control" name="keterangan" rows="6" placeholder="Masukkan Keterangan">{{ old('keterangan', $saham->keterangan) }}</textarea>
 
                                         @error('keterangan')
                                         <div class="invalid-feedback" style="display: block">
@@ -96,7 +100,7 @@
                                 </div>
                             </div>
 
-                            <button class="btn btn-primary mr-1 btn-submit" type="submit"><i class="fa fa-paper-plane"></i> SIMPAN</button>
+                            <button class="btn btn-primary mr-1 btn-submit" type="submit"><i class="fa fa-paper-plane"></i> UPDATE</button>
                             <button class="btn btn-warning btn-reset" type="reset"><i class="fa fa-redo"></i> RESET</button>
 
                         </form>

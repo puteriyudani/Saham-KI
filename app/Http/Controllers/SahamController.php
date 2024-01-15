@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Saham;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SahamController extends Controller
@@ -11,7 +13,8 @@ class SahamController extends Controller
      */
     public function index()
     {
-        //
+        $sahams = Saham::paginate(10);
+        return view('saham.index', compact('sahams'));
     }
 
     /**
@@ -19,7 +22,8 @@ class SahamController extends Controller
      */
     public function create()
     {
-        return view('saham.create');
+        $pemegangsahams = User::where('role', 'pemegang_saham')->get();
+        return view('saham.create', compact('pemegangsahams'));
     }
 
     /**
@@ -27,7 +31,19 @@ class SahamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nominal' => 'required',
+            'tanggal' => 'required',
+            'nama' => 'required',
+            'keterangan' => 'required',
+        ]);
+
+        $input = $request->all();
+    
+        Saham::create($input);
+    
+        return redirect()->route('dashboard')
+                        ->with('success','Investasi Saham created successfully.');
     }
 
     /**
@@ -41,24 +57,37 @@ class SahamController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Saham $saham)
     {
-        //
+        $pemegangsahams = User::where('role', 'pemegang_saham')->get();
+        return view('saham.edit', compact('saham', 'pemegangsahams'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Saham $saham)
     {
-        //
+        $request->validate([
+            'nominal' => 'required',
+            'tanggal' => 'required',
+            'nama' => 'required',
+            'keterangan' => 'required',
+        ]);
+    
+        $saham->update($request->all());
+    
+        return redirect()->route('dashboard')
+                        ->with('success','Investasi Saham updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Saham $saham)
     {
-        //
+        $saham->delete();
+    
+        return back()->with('success','Investasi Saham deleted successfully');
     }
 }

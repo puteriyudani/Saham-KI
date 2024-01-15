@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\KewajibanInvestasiController;
+use App\Http\Controllers\ProsesController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SahamController;
 use App\Http\Controllers\SesiController;
@@ -35,12 +37,12 @@ Route::middleware(['auth'])->group(function() {
 
 Route::middleware(['auth', 'userAkses:admin'])->group(function() {
     Route::get('/admin', [AdminController::class, 'index']);
-    Route::get('/logout', [SesiController::class, 'logout'])->name('logout');
+    Route::resource('kewajiban-investasi', KewajibanInvestasiController::class);
 });
 
 Route::middleware(['auth', 'userAkses:pemegang_saham'])->group(function() {
     Route::get('/pemegang-saham', [AdminController::class, 'pemegang_saham']);
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
-    Route::get('/saham', [SahamController::class, 'create'])->name('saham.create');
+    Route::resource('saham', SahamController::class);
 });
