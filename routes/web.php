@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KewajibanInvestasiController;
+use App\Http\Controllers\ModalDasarController;
 use App\Http\Controllers\ProsesController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SahamController;
@@ -36,8 +37,9 @@ Route::middleware(['auth'])->group(function() {
 });
 
 Route::middleware(['auth', 'userAkses:admin'])->group(function() {
-    Route::get('/admin', [AdminController::class, 'index']);
-    Route::resource('kewajiban-investasi', KewajibanInvestasiController::class);
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+    Route::resource('modaldasar', ModalDasarController::class);
+    Route::resource('kewajibaninvestasi', KewajibanInvestasiController::class);
 });
 
 Route::middleware(['auth', 'userAkses:pemegang_saham'])->group(function() {

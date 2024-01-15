@@ -18,10 +18,14 @@
                     </div>
 
                     <div class="card-body">
-
+                        @foreach ($modaldasars as $modaldasar)
+                            <a href="{{ route('modaldasar.edit', ['modaldasar' => $modaldasar->id]) }}" class="btn btn-primary">Modal Dasar</a>
+                        @endforeach
+                        <a href="{{ route('kewajibaninvestasi.index') }}" class="btn btn-success">Kewajiban Investasi</a>
                     </div>
                 </div>
             </div>
+
         </section>
     </div>
 

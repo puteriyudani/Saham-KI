@@ -53,23 +53,29 @@
             <nav class="navbar navbar-expand-lg main-navbar">
                 <form class="form-inline mr-auto">
                     <ul class="navbar-nav mr-3">
-                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
+                        <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
+                                    class="fas fa-bars"></i></a></li>
                     </ul>
                 </form>
                 <ul class="navbar-nav navbar-right">
 
-                    <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                            <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+                    <li class="dropdown"><a href="#" data-toggle="dropdown"
+                            class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                            <img alt="image" src="{{ asset('assets/img/avatar/avatar-1.png') }}"
+                                class="rounded-circle mr-1">
                             <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="dropdown-title">Logged in as <strong>{{ Auth::user()->email }}</strong></div>
                             <div class="dropdown-divider"></div>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();" class="dropdown-item has-icon text-danger">
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
+                                class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> KELUAR
                             </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
                                 @csrf
                             </form>
                         </div>
@@ -85,7 +91,13 @@
                     </div>
                     <ul class="sidebar-menu" style="margin-top: 20px;">
                         <li class="menu-header">MAIN MENU</li>
-                        <li class=""><a class="nav-link" href="{{ route('dashboard') }}"><i class="fas fa-home"></i> <span>DASHBOARD</span></a></li>
+                        @if (auth()->user() && auth()->user()->role == 'admin')
+                            <li class=""><a class="nav-link" href="{{ route('admin') }}"><i
+                                        class="fas fa-home"></i> <span>ADMIN DASHBOARD</span></a></li>
+                        @elseif(auth()->user() && auth()->user()->role == 'pemegang_saham')
+                            <li class=""><a class="nav-link" href="{{ route('dashboard') }}"><i
+                                        class="fas fa-home"></i> <span>DASHBOARD</span></a></li>
+                        @endif
                         {{-- <li class="{{ setActive('account/dashboard') }}"><a class="nav-link" href="{{ route('dashboard') }}"><i class="fas fa-home"></i> <span>DASHBOARD</span></a></li> --}}
                     </ul>
                 </aside>
@@ -96,7 +108,8 @@
 
 
 
-            <footer class="main-footer" style="border-top: 3px solid #6777ef;background-color: #ffffff;margin-bottom: -20px">
+            <footer class="main-footer"
+                style="border-top: 3px solid #6777ef;background-color: #ffffff;margin-bottom: -20px">
                 <div class="footer-text-align-center">
                     <strong>Copyright</strong> © <strong>IMAGI</strong> <?php echo date('Y'); ?>
                 </div>

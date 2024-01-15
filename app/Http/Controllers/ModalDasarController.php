@@ -58,8 +58,7 @@ class ModalDasarController extends Controller
     
         $modaldasar->update($request->all());
     
-        return redirect()->route('')
-                        ->with('success','Modal Dasar updated successfully');
+        return redirect('admin')->with('success','Modal Dasar updated successfully');
     }
 
     /**

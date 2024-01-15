@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\KI;
+use App\Models\ModalDasar;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class KewajibanInvestasiController extends Controller
     public function index()
     {
         $pemegangsahams = User::where('role', 'pemegang_saham')->get();
-        return view('ki.create', compact('pemegangsahams'));
+        $kewajibaninvestasis = KI::paginate(10);
+        $modaldasar = ModalDasar::get();
+        return view('ki.index', compact('pemegangsahams', 'kewajibaninvestasis', 'modaldasar'));
     }
 
     /**
@@ -40,7 +43,7 @@ class KewajibanInvestasiController extends Controller
     
         KI::create($input);
     
-        return redirect()->route('dashboard')
+        return redirect()->route('kewajibaninvestasi.index')
                         ->with('success','Investasi Saham created successfully.');
     }
 
@@ -55,24 +58,36 @@ class KewajibanInvestasiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(KI $kewajibaninvestasi)
     {
-        //
+        $modaldasars = ModalDasar::get();
+        $pemegangsahams = User::where('role', 'pemegang_saham')->get();
+        return view('ki.edit', compact('pemegangsahams', 'kewajibaninvestasi', 'modaldasars'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, KI $kewajibaninvestasi)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'nominal' => 'required',
+        ]);
+    
+        $kewajibaninvestasi->update($request->all());
+    
+        return redirect()->route('kewajibaninvestasi.index')
+                        ->with('success','Kewajiban Investasi updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(KI $kewajibaninvestasi)
     {
-        //
+        $kewajibaninvestasi->delete();
+    
+        return back()->with('success','Kewajiban Investasi deleted successfully');
     }
 }

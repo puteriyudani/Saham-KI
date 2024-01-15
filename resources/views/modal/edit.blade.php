@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
 @section('title')
-    Kewajiban Investasi
+    Edit Modal Dasar
 @stop
 
 @section('content')
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1> KEWAJIBAN INVESTASI </h1>
+                <h1> MODAL DASAR </h1>
             </div>
 
             <div class="section-body">
 
                 <div class="card">
                     <div class="card-header">
-                        <h4><i class="fas fa-money-check-alt"></i> TAMBAH KEWAJIBAN INVESTASI </h4>
+                        <h4><i class="fas fa-money-check-alt"></i> EDIT MODAL DASAR </h4>
                     </div>
 
                     <div class="card-body">
@@ -31,34 +31,15 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('kewajibaninvestasi.store') }}" method="POST">
+                        <form action="{{ route('modaldasar.update', $modaldasar->id) }}" method="POST">
                             @csrf
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label>NAMA</label>
-                                        <select class="form-control select2" name="nama" style="width: 100%">
-                                            <option value="">-- PILIH NAMA --</option>
-                                            @foreach ($pemegangsahams as $pemegangsaham)
-                                                <option value="{{ $pemegangsaham->name }}"> {{ $pemegangsaham->name }}</option>
-                                            @endforeach
-                                        </select>
-
-                                        @error('nama')
-                                        <div class="invalid-feedback" style="display: block">
-                                            {{ $message }}
-                                        </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
+                            @method('PUT')
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>NOMINAL (Rp.)</label>
-                                        <input type="text" name="nominal" value="{{ old('nominal') }}" placeholder="Masukkan Nominal" class="form-control currency">
+                                        <input type="text" name="nominal" value="{{ old('nominal', $modaldasar->nominal) }}" placeholder="Masukkan Nominal" class="form-control currency">
 
                                         @error('nominal')
                                         <div class="invalid-feedback" style="display: block">
