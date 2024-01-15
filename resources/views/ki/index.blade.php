@@ -16,7 +16,7 @@
                 @if (isset($kewajibaninvestasis))
                     <div class="card">
                         <div class="card-header">
-                            <h4><i class="fas fa-chart-area"></i> KEWAJIBAN INVESTASI </h4>
+                            <h4><i class="fas fa-chart-area"></i> KEWAJIBAN INVESTASI IMAGI </h4>
                             <a class="ml-2" href="{{ route('kewajibaninvestasi.create') }}"><i class="fas fa-plus"></i></a>
                         </div>
 
