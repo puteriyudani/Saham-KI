@@ -14,4 +14,10 @@ class AdminController extends Controller
         $modaldasars = ModalDasar::get();
         return view('admin', compact('modaldasars'));
     }
+
+    public function adminuser()
+    {
+        $users = User::paginate(10);
+        return view('user.index', compact('users'));
+    }
 }

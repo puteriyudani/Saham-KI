@@ -94,6 +94,8 @@
                         @if (auth()->user() && auth()->user()->role == 'admin')
                             <li class=""><a class="nav-link" href="{{ route('admin') }}"><i
                                         class="fas fa-home"></i> <span>ADMIN DASHBOARD</span></a></li>
+                            <li class=""><a class="nav-link" href="{{ route('admin.user') }}"><i
+                                        class="fas fa-user"></i> <span>KELOLA USER</span></a></li>
                         @elseif(auth()->user() && auth()->user()->role == 'pemegang_saham')
                             <li class=""><a class="nav-link" href="{{ route('dashboard') }}"><i
                                         class="fas fa-home"></i> <span>DASHBOARD</span></a></li>

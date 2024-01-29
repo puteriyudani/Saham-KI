@@ -8,6 +8,7 @@ use App\Http\Controllers\ProsesController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SahamController;
 use App\Http\Controllers\SesiController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,11 +41,11 @@ Route::middleware(['auth', 'userAkses:admin'])->group(function() {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::resource('modaldasar', ModalDasarController::class);
     Route::resource('kewajibaninvestasi', KewajibanInvestasiController::class);
+    Route::resource('saham', SahamController::class);
+    Route::get('/admin-kelola-user', [AdminController::class, 'adminuser'])->name('admin.user');
+    Route::resource('user', UserController::class);
 });
 
 Route::middleware(['auth', 'userAkses:pemegang_saham'])->group(function() {
-    Route::get('/pemegang-saham', [AdminController::class, 'pemegang_saham']);
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-
-    Route::resource('saham', SahamController::class);
 });

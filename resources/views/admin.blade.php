@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Dashboard Admin
+    Admin - Dashboard
 @stop
 
 @section('content')
@@ -14,7 +14,8 @@
             <div class="section-body">
                 <div class="card">
                     <div class="card-header">
-                        <h4><i class="fas fa-chart-area"></i> ADMIN </h4>
+                        <h4><i class="fas fa-chart-area"></i> INVESTASI SAHAM IMAGI </h4>
+                        <a class="ml-2" href="{{ route('saham.index') }}"><i class="fas fa-edit"></i></a>
                     </div>
 
                     <div class="card-body">

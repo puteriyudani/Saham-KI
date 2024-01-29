@@ -17,8 +17,6 @@
                     <div class="card">
                         <div class="card-header">
                             <h4><i class="fas fa-chart-area"></i> SAHAM IMAGI </h4>
-                            <a class="ml-2" href="{{ route('saham.create') }}"><i class="fas fa-plus"></i></a>
-                            <a class="ml-2" href="{{ route('saham.index') }}"><i class="fas fa-edit"></i></a>
                         </div>
 
                         <div class="card-body">

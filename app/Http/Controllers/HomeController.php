@@ -19,7 +19,7 @@ class HomeController extends Controller
 
     public function index() {
         $modaldasar = ModalDasar::get();
-        $saham = Saham::paginate(10);
+        $saham = Saham::paginate(100);
         $pemegangsahams = User::where('role', 'pemegang_saham')->get();
         $kewajibaninvestasi = KI::get();
 
