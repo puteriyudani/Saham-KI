@@ -99,6 +99,9 @@
                         @elseif(auth()->user() && auth()->user()->role == 'pemegang_saham')
                             <li class=""><a class="nav-link" href="{{ route('dashboard') }}"><i
                                         class="fas fa-home"></i> <span>DASHBOARD</span></a></li>
+                        @elseif(auth()->user() && auth()->user()->role == 'komisaris_utama')
+                            <li class=""><a class="nav-link" href="{{ route('dashboard.komisarisutama') }}"><i
+                                        class="fas fa-home"></i> <span>DASHBOARD</span></a></li>
                         @endif
                         {{-- <li class="{{ setActive('account/dashboard') }}"><a class="nav-link" href="{{ route('dashboard') }}"><i class="fas fa-home"></i> <span>DASHBOARD</span></a></li> --}}
                     </ul>

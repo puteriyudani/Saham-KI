@@ -59,6 +59,7 @@
                                                 <option selected>Role</option>
                                                 <option value="admin">Admin</option>
                                                 <option value="pemegang_saham">Pemegang Saham</option>
+                                                <option value="komisaris_utama">Komisaris Utama</option>
                                             </select>
                                             @error('role')
                                                 <div class="invalid-feedback" style="display: block">

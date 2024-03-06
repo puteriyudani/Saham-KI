@@ -8,7 +8,7 @@ use App\Models\Saham;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class KomisarisUtamaController extends Controller
 {
     protected $prosesController;
 
@@ -28,6 +28,6 @@ class HomeController extends Controller
         $persentase = $this->prosesController->progresinvestasi();
         $hutangInvestasi = $this->prosesController->hutanginvestasi();
 
-        return view('dashboard', compact('modaldasar', 'saham', 'pemegangsahams', 'kewajibaninvestasi', 'totalNominals', 'persentase', 'hutangInvestasi'));
+        return view('komisarisutama.dashboard', compact('modaldasar', 'saham', 'pemegangsahams', 'kewajibaninvestasi', 'totalNominals', 'persentase', 'hutangInvestasi'));
     }
 }

@@ -70,6 +70,7 @@
                                             <option value="{{ $user->role }}">{{ $user->role }}</option>
                                             <option value="admin">Admin</option>
                                             <option value="pemegang_saham">Pemegang Saham</option>
+                                            <option value="komisaris_utama">Komisaris Utama</option>
                                         </select>
 
                                         @error('role')

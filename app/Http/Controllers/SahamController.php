@@ -22,7 +22,7 @@ class SahamController extends Controller
      */
     public function create()
     {
-        $pemegangsahams = User::where('role', 'pemegang_saham')->get();
+        $pemegangsahams = User::whereIn('role', ['pemegang_saham', 'komisaris_utama'])->get();
         return view('saham.create', compact('pemegangsahams'));
     }
 
@@ -42,7 +42,7 @@ class SahamController extends Controller
     
         Saham::create($input);
     
-        return redirect()->route('dashboard')
+        return redirect()->route('saham.index')
                         ->with('success','Investasi Saham created successfully.');
     }
 
@@ -59,7 +59,7 @@ class SahamController extends Controller
      */
     public function edit(Saham $saham)
     {
-        $pemegangsahams = User::where('role', 'pemegang_saham')->get();
+        $pemegangsahams = User::whereIn('role', ['pemegang_saham', 'komisaris_utama'])->get();
         return view('saham.edit', compact('saham', 'pemegangsahams'));
     }
 
@@ -77,7 +77,7 @@ class SahamController extends Controller
     
         $saham->update($request->all());
     
-        return redirect()->route('dashboard')
+        return redirect()->route('saham.index')
                         ->with('success','Investasi Saham updated successfully');
     }
 

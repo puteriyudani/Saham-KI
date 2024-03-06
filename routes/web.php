@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KewajibanInvestasiController;
+use App\Http\Controllers\KomisarisUtamaController;
 use App\Http\Controllers\ModalDasarController;
 use App\Http\Controllers\ProsesController;
 use App\Http\Controllers\RegisterController;
@@ -29,23 +30,27 @@ Route::middleware(['guest'])->group(function() {
     Route::post('/register', [SesiController::class, 'registerPost'])->name('register.post');
 });
 
-// Route::get('/home', function() {
-//     return redirect('/admin');
-// });
-
 Route::middleware(['auth'])->group(function() {
     Route::post('/logout', [SesiController::class, 'logout'])->name('logout');
+});
+
+Route::middleware(['auth', 'userAkses:komisaris_utama,admin'])->group(function () {
+    // Routes yang hanya bisa diakses oleh komisaris_utama dan admin
+    Route::resource('saham', SahamController::class);
 });
 
 Route::middleware(['auth', 'userAkses:admin'])->group(function() {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::resource('modaldasar', ModalDasarController::class);
     Route::resource('kewajibaninvestasi', KewajibanInvestasiController::class);
-    Route::resource('saham', SahamController::class);
     Route::get('/admin-kelola-user', [AdminController::class, 'adminuser'])->name('admin.user');
     Route::resource('user', UserController::class);
 });
 
 Route::middleware(['auth', 'userAkses:pemegang_saham'])->group(function() {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+});
+
+Route::middleware(['auth', 'userAkses:komisaris_utama'])->group(function() {
+    Route::get('/dashboard-komisaris-utama', [KomisarisUtamaController::class, 'index'])->name('dashboard.komisarisutama');
 });

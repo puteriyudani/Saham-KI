@@ -53,12 +53,13 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user = auth()->user();
+        // $user = auth()->user();
 
         // Validasi input
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'role' => 'required',
             'password' => 'nullable',
             'password_confirmation' => 'nullable|same:password',
         ]);
@@ -67,6 +68,7 @@ class UserController extends Controller
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
+            'role' => $request->role,
             'password' => $request->password ? Hash::make($request->password) : $user->password,
         ]);
 
